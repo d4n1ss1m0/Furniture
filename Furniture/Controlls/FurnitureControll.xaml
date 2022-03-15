@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Furniture.Controlls.FurnitureControll"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Furniture.Controlls"
+             mc:Ignorable="d" 
+             xmlns:viewModels="clr-namespace:Furniture.ViewModels"
+             d:DesignHeight="200" d:DesignWidth="500">
+    
+    <Grid Background="White" Height="200" Width="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="110*"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="167*"/>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="112*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="../Image/boss.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
+        <Label x:Name="FName" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Content="{Binding Furniture.Name}" />
+        <Label x:Name="FDescription" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Content="{Binding Furniture.Description}"/>
+        <Label Content="В наличии:" Grid.Row="2" Grid.Column="1" />
+        <Label x:Name="Amount" Grid.Column="2" Grid.Row="2" Content="{Binding Furniture.Amount}"/>
+        <TextBox x:Name="TextBoxAmount" Grid.Row="2" Grid.Column="3" Text="{Binding Path=AmountText, Mode=TwoWay}"/>
+        <Button x:Name="AddBtn" Grid.Column="4" Grid.Row="2" Content="Добавить в корзину" Command="{Binding ParameterisedCommand}"  />
+    </Grid>
+</UserControl>

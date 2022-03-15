@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Furniture.Views.SellersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Furniture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid Background="White">
+        <StackPanel>
+            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Sellers, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="ID" Width="133*" Binding="{Binding IDseller}"/>
+                    <DataGridTextColumn Header="FN" Width="133*" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="LN" Width="133*" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="MN" Width="133*" Binding="{Binding MidName}" />
+                    <DataGridTextColumn Header="salary" Width="133*" Binding="{Binding Salary}"/>
+                    <DataGridTextColumn Header="SumProd" Width="133*" Binding="{Binding SumProd}"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</UserControl>

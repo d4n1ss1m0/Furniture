@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Furniture.Views.FurnitureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Furniture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid Background="White">
+        <StackPanel>
+            <!--
+                <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Furnitures, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="Номер" Width="133*" Binding="{Binding IDfurniture}"/>
+                        <DataGridTextColumn Header="Название" Width="133*" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Описание" Width="133*" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Header="Поставщики" Width="133*" Binding="{Binding IDsupplier}" />
+                        <DataGridTextColumn Header="Категория" Width="133*" Binding="{Binding Category}"/>
+                        <DataGridTextColumn Header="Цвет" Width="133*" Binding="{Binding Color}"/>
+                        <DataGridTextColumn Header="Количество" Width="133*" Binding="{Binding Amount}"/>
+                        <DataGridTextColumn Header="Цена" Width="133*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Цена закупки" Width="133*" Binding="{Binding PurchasePrice}"/>
+                    </DataGrid.Columns>
+
+                </DataGrid> -->
+            <Button Content="Go to seller" Command="{Binding NavigateSellerCommand}"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
