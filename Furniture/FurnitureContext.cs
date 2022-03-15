@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +10,10 @@ namespace Furniture
 {
     public class FurnitureContext : DbContext
     {
-        public FurnitureContext(string login, string password) : base("Data Source =.\\SQLEXPRESS; Initial Catalog = 'Furniture'; User Id = " + login + "; Password=" + password)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
-        }
-
-        public FurnitureContext() : base("Data Source =.\\SQLEXPRESS; Initial Catalog = 'furnitureShop'; Trusted_connection=true;")
-        {
-
+            //optionsBuilder.UseSqlServer(@"Data Source =.\\SQLEXPRESS; Initial Catalog = 'furnitureShop'; Trusted_connection=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS; Database=furnitureShop;Integrated Security=True;TrustServerCertificate=true;");
         }
 
         public DbSet<Seller> Sellers { get; set; }
@@ -26,7 +22,17 @@ namespace Furniture
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Furniture_Bill> Furniture_Bills {get;set;}
         public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<Accounts> Accounts { get; set; }
+        public DbSet<Application> Applications { get; set; }
+        public DbSet<Purchase> Purchase { get; set; }
+        public DbSet<Furniture_purchase> Furniture_Purchases { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Furniture_Bill>()
+            .HasKey(p => new { p.IDbill, p.IDfurniture });
+        }
 
     }
 }

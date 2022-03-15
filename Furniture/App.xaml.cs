@@ -15,8 +15,7 @@ namespace Furniture
     /// </summary>
     public partial class App : Application
     {
-
-
+        public static Models.Accounts acc;
         protected override void OnStartup(StartupEventArgs e)
         {
             

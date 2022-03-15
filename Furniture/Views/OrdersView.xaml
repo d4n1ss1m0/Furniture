@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Furniture.Views.OrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Furniture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="133*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="CreateReport" Content="Создать отчет" Command="{Binding CreateReport}" Grid.Column="1" Grid.Row="0"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+            <DataGrid x:Name="ordersGrid"  x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="ID чека" Width="133*" Binding="{Binding Bill.IDbill}"/>
+                <DataGridTextColumn Header="ID квитанции" Width="133*" Binding="{Binding Receipt.IDreceipt}" />
+                <DataGridTextColumn Header="Фамилия продавца" Width="133*" Binding="{Binding Seller.LastName}"/>
+                <DataGridTextColumn Header="Итоговая стоимость" Width="133*" Binding="{Binding Bill.Sum}"/>
+                <DataGridTextColumn Header="Товары" Width="133*" Binding="{Binding Order}"/>
+                <DataGridTextColumn Header="Фамилия покупателя" Width="133*" Binding="{Binding Receipt.LastName}"/>
+                    <DataGridTextColumn Header="Имя покупателя" Width="133*" Binding="{Binding Receipt.FirstName}"/>
+                    <DataGridTextColumn Header="Отчество покупателя" Width="133*" Binding="{Binding Receipt.MiddleName}"/>
+                    <DataGridTextColumn Header="Дата оформления" Width="133*" Binding="{Binding Receipt.RecieveDate}"/>
+                    <DataGridTextColumn Header="Время оформления" Width="133*" Binding="{Binding Receipt.ReceiveTime}"/>
+                    <DataGridTextColumn Header="Телефон покупателя" Width="133*" Binding="{Binding Receipt.Phone}"/>
+                    <DataGridTextColumn Header="Адрес доставки" Width="133*" Binding="{Binding Receipt.Address}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

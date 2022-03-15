@@ -15,10 +15,12 @@ namespace Furniture.Models
         private int idFurniture;
         private int amount;
 
-        [Key, Column(Order =0), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 0)]
         public int IDbill { get => idBill; set => idBill = value; }
-        [Key, Column(Order = 1), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 1)]
         public int IDfurniture { get => idFurniture; set => idFurniture = value; }
         public int Amount { get => amount; set => amount = value; }
+
+
     }
 }

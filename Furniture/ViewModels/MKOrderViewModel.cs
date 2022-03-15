@@ -1,4 +1,4 @@
-﻿using Furniture.Commands;
+﻿ using Furniture.Commands;
 using Furniture.Store;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace Furniture.ViewModels
 {
     class MKOrderViewModel : ViewModelBase
     {
+        public DeliverySheduleItem SelectedDelivery { get; set; }
         private DateTime selectedDate;
         private static List<Cart> cart;
          
@@ -90,7 +91,10 @@ namespace Furniture.ViewModels
                     furnitureBill.Amount = e.AmountCart;
                     furnitureBill.IDfurniture = e.Furniture.IDfurniture;
                     furnitureBill.IDbill = bill.IDbill;
-                    rangeFurnitureBills.Add(furnitureBill);                   
+                    //вычет
+                    db.Furnitures.Find(e.Furniture.IDfurniture).Amount -= e.AmountCart;
+                    rangeFurnitureBills.Add(furnitureBill);        
+                    
                 }
                 bill.Sum = sum;
                 db.Bills.Add(bill);
@@ -108,6 +112,11 @@ namespace Furniture.ViewModels
                 receipt.MiddleName = MiddleName;
                 receipt.IDarea = 1;
                 db.Receipts.Add(receipt);
+                Delivery newDelivery = new Delivery();
+                newDelivery.IdReciept = receipt.IDreceipt;
+                newDelivery.Date = DateTime.Parse(SelectedDelivery.Date);
+                newDelivery.Time = TimeSpan.Parse(SelectedDelivery.Time);
+                db.Delivery.Add(newDelivery);
                 db.SaveChanges();
             }
         }

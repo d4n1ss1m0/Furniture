@@ -17,7 +17,7 @@ namespace Furniture.Models
         private int idBrigade;
         private int idReciept;
 
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDelivery { get => idDelivery; set => idDelivery = value; }
         public DateTime Date { get => date; set => date = value; }
         public TimeSpan Time { get => time; set => time = value; }

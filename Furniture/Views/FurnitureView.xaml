@@ -8,23 +8,30 @@
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid Background="White">
         <StackPanel>
-            <!--
-                <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
     RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Furnitures, UpdateSourceTrigger=PropertyChanged}">
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Header="Номер" Width="133*" Binding="{Binding IDfurniture}"/>
-                        <DataGridTextColumn Header="Название" Width="133*" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Описание" Width="133*" Binding="{Binding Description}"/>
-                        <DataGridTextColumn Header="Поставщики" Width="133*" Binding="{Binding IDsupplier}" />
-                        <DataGridTextColumn Header="Категория" Width="133*" Binding="{Binding Category}"/>
-                        <DataGridTextColumn Header="Цвет" Width="133*" Binding="{Binding Color}"/>
-                        <DataGridTextColumn Header="Количество" Width="133*" Binding="{Binding Amount}"/>
-                        <DataGridTextColumn Header="Цена" Width="133*" Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="Цена закупки" Width="133*" Binding="{Binding PurchasePrice}"/>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEnough}" Value="false">
+                                <Setter Property="Background" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Номер" Width="133*" Binding="{Binding Furniture.IDfurniture}"/>
+                    <DataGridTextColumn Header="Название" Width="133*" Binding="{Binding Furniture.Name}" />
+                    <DataGridTextColumn Header="Описание" Width="133*" Binding="{Binding Furniture.Description}"/>
+                    <DataGridTextColumn Header="Поставщики" Width="133*" Binding="{Binding Furniture.IDsupplier}" />
+                    <DataGridTextColumn Header="Категория" Width="133*" Binding="{Binding Furniture.Category}"/>
+                    <DataGridTextColumn Header="Цвет" Width="133*" Binding="{Binding Furniture.Color}"/>
+                    <DataGridTextColumn Header="Количество" Width="133*" Binding="{Binding Furniture.Amount}"/>
+                    <DataGridTextColumn Header="Цена" Width="133*" Binding="{Binding Furniture.Price}"/>
+                    <DataGridTextColumn Header="Цена закупки" Width="133*" Binding="{Binding Furniture.PurchasePrice}"/>
                     </DataGrid.Columns>
 
-                </DataGrid> -->
-            <Button Content="Go to seller" Command="{Binding NavigateSellerCommand}"/>
+                </DataGrid> 
         </StackPanel>
 
     </Grid>

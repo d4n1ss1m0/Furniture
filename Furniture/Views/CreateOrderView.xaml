@@ -39,10 +39,10 @@
             </ScrollViewer>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.RowSpan="2">
-            <TextBox x:Name="LN" Margin="4"/>
-            <TextBox x:Name="FN" Margin="4"/>
-            <TextBox x:Name="MN" Margin="4"/>
-            <TextBox x:Name="PH" Margin="4"/>
+            <TextBox x:Name="LN" Margin="4" Text="{Binding LastName}"/>
+            <TextBox x:Name="FN" Margin="4" Text="{Binding FirstName}"/>
+            <TextBox x:Name="MN" Margin="4" Text="{Binding MiddleName}"/>
+            <TextBox x:Name="PH" Margin="4" Text="{Binding Phone}"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Grid.RowSpan="2">
             <Label Content="Фамилия"/>
@@ -56,7 +56,7 @@
             <StackPanel Grid.Row="3" Margin="10" Grid.Column="2" Grid.ColumnSpan="2" >
                 <DataGrid Name="Grid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
     RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Delivery, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding SelectedDelivery, Mode=TwoWay}">
+                          SelectedItem="{Binding Path = SelectedDelivery, Mode=TwoWay}">
                     <DataGrid.Columns >
                         <DataGridTextColumn Header="Дата" Width="133*" Binding="{Binding Date}"/>
                         <DataGridTextColumn Header="Время" Width="133*" Binding="{Binding Time}" />

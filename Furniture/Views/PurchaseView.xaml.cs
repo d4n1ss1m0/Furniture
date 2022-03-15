@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace Furniture.Views
 {
     /// <summary>
-    /// Логика взаимодействия для FurnitureView.xaml
+    /// Логика взаимодействия для PurchaseView.xaml
     /// </summary>
-    public partial class FurnitureView : UserControl
+    public partial class PurchaseView : UserControl
     {
-        public FurnitureView()
+        public PurchaseView()
         {
             InitializeComponent();
-
         }
     }
 }

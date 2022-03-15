@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Furniture.Views
+namespace Furniture.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для FurnitureView.xaml
+    /// Логика взаимодействия для AddApplicationView.xaml
     /// </summary>
-    public partial class FurnitureView : UserControl
+    public partial class AddApplicationView : Window
     {
-        public FurnitureView()
+        public AddApplicationView()
         {
             InitializeComponent();
-
+            DataContext = new ViewModels.AddApplicationViewModel();
         }
     }
 }
