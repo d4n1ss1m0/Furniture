@@ -60,6 +60,18 @@ namespace Furniture.ViewModels
                         {
                             new Windows.StorageInterface(navigation_Store).Show();
                         }
+                        else if(acc.role == "Delivery")
+                        {
+                            new Windows.DeliveryInterface(navigationStore).Show();
+                        }
+                        else if(acc.role == "Bookkeeper")
+                        {
+                            new Windows.BookKeeperInterface(navigationStore).Show();
+                        }
+                        else if(acc.role == "Admin")
+                        {
+                            new Windows.AdminInterfaceView(navigationStore).Show();
+                        }
                         App.Current.MainWindow.Close();
                     }
                     else

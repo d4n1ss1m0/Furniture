@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Furniture.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Furniture.ViewModels
 {
@@ -16,13 +17,15 @@ namespace Furniture.ViewModels
         public DeliverySheduleItem SelectedDelivery { get; set; }
         private DateTime selectedDate;
         private static List<Cart> cart;
-         
+        public bool IsSelected { get; set; }
         private ObservableCollection<DeliverySheduleItem> delivery;
         //private RelayCommand parameterizedCommand;
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
         public string Phone { get; set; }
+        public string AllSum { get; set; }
+        public string Address { get; set; }
 
         public DateTime SelectedDate 
         {
@@ -41,7 +44,7 @@ namespace Furniture.ViewModels
                     //var dbDelivery = db.Delivery.Where(p=> p.Date.ToShortDateString() == curentDate.ToShortDateString() );
                     while (timer <= new DateTime().AddHours(18))
                     {
-                        var dbDelivery = db.Delivery.Where(p => (p.Date == selectedDate && p.Time == timer.TimeOfDay));
+                        var dbDelivery = db.Delivery.Where(p => p.Date == selectedDate).Where(p=> p.Time == timer.TimeOfDay);
                         bool isAvalible = true;
                         if (dbDelivery.Count()!=0)
                         {
@@ -60,7 +63,12 @@ namespace Furniture.ViewModels
         public MKOrderViewModel(NavigationStore navigationStore, List<Cart> Cart)
         {
             cart = Cart;
-
+            decimal sum =0;
+            foreach(var i in Cart)
+            {
+                sum += i.Cost;
+            }
+            AllSum = sum.ToString();
             //NavigateBackCommand = new NavigateCommand<AddFurnitureToOrderViewModel>(navigationStore, () => new AddFurnitureToOrderViewModel(navigationStore));
             NavigateBackCommand = new SmartCommand(() =>
             {
@@ -74,54 +82,97 @@ namespace Furniture.ViewModels
 
         public void AddOrder()
         {
-            using (FurnitureContext db = new FurnitureContext())
+            if (FirstName != null && LastName != null )
             {
-                //Создаем чек
-                Bill bill = new Bill();
-                bill.IDbill = db.Bills.AsEnumerable().Last().IDbill + 1;
-                bill.IDSeller = 1;
-                //Создаем отношение товара к чеку
-                List<Furniture_Bill> rangeFurnitureBills = new List<Furniture_Bill>();
-                //считаем итог стоимость, заполняем отношение
-                decimal sum = 0;
-                foreach(Cart e in cart)
+                using (FurnitureContext db = new FurnitureContext())
                 {
-                    sum += e.Cost;
-                    Furniture_Bill furnitureBill = new Furniture_Bill();
-                    furnitureBill.Amount = e.AmountCart;
-                    furnitureBill.IDfurniture = e.Furniture.IDfurniture;
-                    furnitureBill.IDbill = bill.IDbill;
-                    //вычет
-                    db.Furnitures.Find(e.Furniture.IDfurniture).Amount -= e.AmountCart;
-                    rangeFurnitureBills.Add(furnitureBill);        
-                    
+                    //Создаем чек
+                    Bill bill = new Bill();
+                    bill.IDbill = db.Bills.AsEnumerable().Last().IDbill + 1;
+                    bill.IDSeller = db.Sellers.AsEnumerable().Where(p => p.Account == App.acc.id).Last().IDseller;
+                    //Создаем отношение товара к чеку
+                    List<Furniture_Bill> rangeFurnitureBills = new List<Furniture_Bill>();
+                    //считаем итог стоимость, заполняем отношение
+                    decimal sum = 0;
+                    foreach (Cart e in cart)
+                    {
+                        sum += e.Cost;
+                        Furniture_Bill furnitureBill = new Furniture_Bill();
+                        furnitureBill.Amount = e.AmountCart;
+                        furnitureBill.IDfurniture = e.Furniture.IDfurniture;
+                        furnitureBill.IDbill = bill.IDbill;
+                        //вычет
+                        db.Furnitures.Find(e.Furniture.IDfurniture).Amount -= e.AmountCart;
+                        rangeFurnitureBills.Add(furnitureBill);
+
+                    }
+                    bill.Sum = sum;
+                    db.Bills.Add(bill);
+                    db.Furniture_Bills.AddRange(rangeFurnitureBills);
+                    //Создаем квитанцию
+                    Receipt receipt = new Receipt();
+                    receipt.IDreceipt = db.Receipts.AsEnumerable().Last().IDreceipt + 1;
+                    receipt.ReceiveTime = TimeSpan.Parse(DateTime.Now.ToShortTimeString());
+                    receipt.RecieveDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                    if (IsSelected)
+                    {
+                        receipt.Address = Address;
+                    }
+                    receipt.IDbill = bill.IDbill;
+                    receipt.Phone = Phone;
+                    receipt.FirstName = FirstName;
+                    receipt.LastName = LastName;
+                    receipt.MiddleName = MiddleName;
+                    receipt.IDarea = 1;
+                    db.Receipts.Add(receipt);
+                    if (IsSelected)
+                    {
+                        Delivery newDelivery = new Delivery();
+                        newDelivery.IdReciept = receipt.IDreceipt;
+                        newDelivery.Date = DateTime.Parse(SelectedDelivery.Date);
+                        newDelivery.Time = TimeSpan.Parse(SelectedDelivery.Time);
+                        newDelivery.IdBrigade = CheckDate();
+                        db.Delivery.Add(newDelivery);
+                    }
+                    if ((IsSelected && (SelectedDate != null || Address == "")) || !IsSelected)
+                    {
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не введены данные о доставке");
+                    }
+
+
                 }
-                bill.Sum = sum;
-                db.Bills.Add(bill);
-                db.Furniture_Bills.AddRange(rangeFurnitureBills);
-                //Создаем квитанцию
-                Receipt receipt = new Receipt();
-                receipt.IDreceipt = db.Receipts.AsEnumerable().Last().IDreceipt + 1;
-                receipt.ReceiveTime = TimeSpan.Parse(DateTime.Now.ToShortTimeString());
-                receipt.RecieveDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                receipt.Address = "kekw kekw kekl";
-                receipt.IDbill = bill.IDbill;
-                receipt.Phone = Phone;
-                receipt.FirstName = FirstName;
-                receipt.LastName = LastName;
-                receipt.MiddleName = MiddleName;
-                receipt.IDarea = 1;
-                db.Receipts.Add(receipt);
-                Delivery newDelivery = new Delivery();
-                newDelivery.IdReciept = receipt.IDreceipt;
-                newDelivery.Date = DateTime.Parse(SelectedDelivery.Date);
-                newDelivery.Time = TimeSpan.Parse(SelectedDelivery.Time);
-                db.Delivery.Add(newDelivery);
-                db.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Обязательные поля не заполнены");
             }
         }
 
-
+        public int CheckDate()
+        {
+            DateTime date = selectedDate;
+            if(SelectedDate.DayOfWeek == DayOfWeek.Monday || SelectedDate.DayOfWeek == DayOfWeek.Friday)
+            {
+                return 1;
+            }
+            else if (SelectedDate.DayOfWeek == DayOfWeek.Tuesday || SelectedDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                return 2;
+            }
+            else if (SelectedDate.DayOfWeek == DayOfWeek.Wednesday)
+            {
+                return 3;
+            }
+            else if (SelectedDate.DayOfWeek == DayOfWeek.Thursday)
+            {
+                return 4;
+            }
+            return 0;
+        }
         public static List<Cart> Cart { get => cart; set => cart = value; }
         //public ObservableCollection<Models.Furniture> Furnitures { get => furnitures; set => furnitures = value; }
         public Models.Furniture CurentFurniture

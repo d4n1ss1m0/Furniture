@@ -25,6 +25,7 @@ namespace Furniture.ViewModels
                     db.Applications.Add(application);
                     db.SaveChanges();
                     ApplicationsViewModel.Applications.Add(application);
+                    
                 }
             });
         }

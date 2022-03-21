@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Furniture.Windows"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
         xmlns:viewmodels="clr-namespace:Furniture.ViewModels"
         xmlns:views="clr-namespace:Furniture.Views"
         Title="StorageInterface" Height="720" Width="1280">

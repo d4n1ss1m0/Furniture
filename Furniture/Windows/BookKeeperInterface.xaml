@@ -1,0 +1,74 @@
+﻿<Window x:Class="Furniture.Windows.BookKeeperInterface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Furniture.Windows"
+        xmlns:viewmodels="clr-namespace:Furniture.ViewModels"
+        xmlns:views="clr-namespace:Furniture.Views"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Title="BookKeeperInterface" Height="720" Width="1280">
+    <Grid>
+        <TabControl x:Name="products">
+            <!--
+            <TabItem x:Name="smartphonesTab">
+                
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Height="10" Width="10" Fill="Black" />
+                        <TextBlock Margin="3">Продавцы</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Content="{Binding SellerViewModel}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type viewmodels:SellerViewModel}">
+                                <views:SellersView/>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
+                -->
+            <TabItem x:Name="applicationsTab">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="10" Width="10" Fill="Black" />
+                        <TextBlock Margin="3">Доставки</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Content="{Binding ApplicationsBookViewModel}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type viewmodels:ApplicationsBookViewModel}">
+                                <views:ApplicationsBookView/>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
+            
+            
+            <!--
+            <TabItem x:Name="ordersTab">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="10" Width="10" Fill="Black" />
+                        <TextBlock Margin="3">Заказы</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ContentControl Content="{Binding OrdersViewModel}">
+                        <ContentControl.Resources>
+                            <DataTemplate DataType="{x:Type viewmodels:OrdersViewModel}">
+                                <views:OrdersView/>
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+                </TabItem.Content>
+            </TabItem>
+            -->
+        </TabControl>
+    </Grid>
+</Window>

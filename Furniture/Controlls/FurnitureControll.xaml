@@ -7,26 +7,36 @@
              mc:Ignorable="d" 
              xmlns:viewModels="clr-namespace:Furniture.ViewModels"
              d:DesignHeight="200" d:DesignWidth="500">
-    
+
     <Grid Background="White" Height="200" Width="500">
         <Grid.RowDefinitions>
-            <RowDefinition Height="33*"/>
-            <RowDefinition Height="110*"/>
-            <RowDefinition Height="57*"/>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="42*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="167*"/>
-            <ColumnDefinition Width="81*"/>
-            <ColumnDefinition Width="46*"/>
-            <ColumnDefinition Width="95*"/>
-            <ColumnDefinition Width="112*"/>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="105*"/>
+            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="85*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="../Image/boss.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
+        <Image Source="{Binding Path}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Margin="10"/>
         <Label x:Name="FName" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="4" Content="{Binding Furniture.Name}" />
-        <Label x:Name="FDescription" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Content="{Binding Furniture.Description}"/>
-        <Label Content="В наличии:" Grid.Row="2" Grid.Column="1" />
-        <Label x:Name="Amount" Grid.Column="2" Grid.Row="2" Content="{Binding Furniture.Amount}"/>
-        <TextBox x:Name="TextBoxAmount" Grid.Row="2" Grid.Column="3" Text="{Binding Path=AmountText, Mode=TwoWay}"/>
-        <Button x:Name="AddBtn" Grid.Column="4" Grid.Row="2" Content="Добавить в корзину" Command="{Binding ParameterisedCommand}"  />
+        <Label  Grid.Column="1" Grid.Row="2"  Content="Категория:" />
+        <Label  Grid.Column="2" Grid.Row="2"  Content="{Binding Furniture.Category}" />
+        <Label  Grid.Column="3" Grid.Row="2"  Content="Цвет:" />
+        <Label  Grid.Column="4" Grid.Row="2"  Content="{Binding Furniture.Color}" />
+        <Label  Grid.Column="1" Grid.Row="3"  Content="Цена:" />
+        <Label  Grid.Column="2" Grid.Row="3"  Content="{Binding Furniture.Price}" />
+        <Label Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Content="{Binding Furniture.Description}" />
+        <Label Content="В наличии:" Grid.Row="4" Grid.Column="1" />
+        <Label x:Name="Amount" Grid.Column="2" Grid.Row="4" Content="{Binding Furniture.Amount}"/>
+        <TextBox x:Name="TextBoxAmount" Grid.Row="4" Grid.Column="3" Text="{Binding Path=AmountText, Mode=TwoWay}" FontSize="25"/>
+        <Button x:Name="AddBtn" Grid.Column="4" Grid.Row="4" Command="{Binding ParameterisedCommand}"  >
+            <TextBlock Text="Добавить в корзину" TextWrapping="Wrap"/>
+        </Button>
     </Grid>
 </UserControl>

@@ -8,12 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="13*"/>
-            <RowDefinition Height="77*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="133*"/>
         </Grid.RowDefinitions>
         <Button Content="Добавить заявку" Grid.Row="0" HorizontalAlignment="Right" Margin="200,10,10,10" Command="{Binding Add}"/>
-        <StackPanel Grid.Row="1">
-            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+        <ScrollViewer Grid.Row="1">
+            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" IsReadOnly="True"
     RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Applications, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Номер заявки" Width="133*" Binding="{Binding IDapplication}"/>
@@ -24,7 +24,7 @@
                 </DataGrid.Columns>
 
             </DataGrid>
-        </StackPanel>
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

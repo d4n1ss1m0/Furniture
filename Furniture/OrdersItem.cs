@@ -24,7 +24,7 @@ namespace Furniture
                 var fBills = db.Furniture_Bills.Where(p => p.IDbill == bill.IDbill);
                 foreach(Furniture_Bill furniture_Bill in fBills)
                 {
-                    Order += furniture_Bill.IDfurniture.ToString() + " x " + furniture_Bill.Amount.ToString();
+                    Order += furniture_Bill.IDfurniture.ToString().TrimEnd(' ') + "(" + furniture_Bill.Amount.ToString().TrimEnd(' ') + " шт.) ";
                 }
             }
         }

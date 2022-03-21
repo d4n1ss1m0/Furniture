@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Furniture.Store;
 
 namespace Furniture
 {
@@ -23,12 +24,12 @@ namespace Furniture
     /// </summary>
     public partial class MainWindow : Window
     {
+        NavigationStore _navigationStore { get; set; }
         
-        
-        public MainWindow()
+        public MainWindow(NavigationStore navigationStore)
         {
             InitializeComponent();
-            
+            DataContext = new ViewModels.MainViewModel(navigationStore);
 
 
         }

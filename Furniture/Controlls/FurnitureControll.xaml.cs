@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +13,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Drawing.Imaging;
+
 
 namespace Furniture.Controlls
 {
     /// <summary>
     /// Логика взаимодействия для FurnitureControll.xaml
     /// </summary>
+    /// 
+
+    public static class BitmapConversion
+    {
+        public static BitmapSource BitmapToBitmapSource(Bitmap source)
+        {
+            return System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
+                          source.GetHbitmap(),
+                          IntPtr.Zero,
+                          Int32Rect.Empty,
+                          BitmapSizeOptions.FromEmptyOptions());
+        }
+    }
+
     public partial class FurnitureControll : UserControl
     {
         private RelayCommand parameterizedCommand;
         private string amountText="0";
         private Models.Furniture furniture;
+        public BitmapSource Path { get; set; }
         public FurnitureControll()
         {
             InitializeComponent();
@@ -30,11 +48,22 @@ namespace Furniture.Controlls
 
         public FurnitureControll(Models.Furniture f)
         {
-            InitializeComponent();
+            
             furniture = f;
             DataContext = this;
+            Bitmap bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\Closet.png", true);
+            switch (f.Category.Replace(" ",string.Empty))
+            {
+                case "Шкаф": bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\Closet.png", true);  break;
+                case "Стул": bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\Chair.png", true);  break;
+                case "Диван": bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\Couch.png", true);  break;
+                case "Стол": bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\OfficeTable.png", true); break;
+                case "Кровать": bitmap = (Bitmap)Bitmap.FromFile(@"..\..\Image\Bed.png", true); break;
+            }
+            Path = BitmapConversion.BitmapToBitmapSource(bitmap);
             parameterizedCommand = new RelayCommand(DoParameterisedCommand);
             parameterizedCommand.IsEnabled = true;
+            InitializeComponent();
         }
 
         public string AmountText { get => amountText; set => amountText = value; }

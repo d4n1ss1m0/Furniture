@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 using Furniture.Store;
 
 namespace Furniture.ViewModels
@@ -18,8 +19,9 @@ namespace Furniture.ViewModels
 
         public StorageInterfaceViewModel(NavigationStore navigationStore)
         {
-            /*
+            
             _navigationStore = navigationStore;
+            /*
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
             _navigationStore.CurrentViewModel = new AddFurnitureToOrderViewModel(navigationStore);
             */
@@ -39,6 +41,17 @@ namespace Furniture.ViewModels
         private void OnCurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentViewModel));
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+
+            if (App.acc.role != "Admin")
+            {
+                App.Current.MainWindow = new MainWindow(_navigationStore);
+                App.Current.MainWindow.Show();
+            }
+            
         }
     }
 }

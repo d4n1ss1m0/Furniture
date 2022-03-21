@@ -9,16 +9,16 @@
     <ScrollViewer>
         <Grid x:Name="Grid" Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="691*"/>
-                <ColumnDefinition Width="92*"/>
+                <ColumnDefinition Width="390*"/>
+                <ColumnDefinition Width="31*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="67*"/>
-                <RowDefinition Height="383*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="41*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Content="Товары" FontSize="40" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"></Label>
-            <Button x:Name="CartBtn"  Grid.Column="1" Grid.Row="0" Command="{Binding NavigateCreateOrderCommand }">
-                <Image Source="../Image/boss.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
+            <Button x:Name="CartBtn"  Grid.Column="1" Grid.Row="0" Command="{Binding NavigateCreateOrderCommand }"  BorderBrush="White">
+                <Image Source="../Image/Cart.png" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
             </Button>
             <StackPanel x:Name="Panel" Grid.Row="1" Grid.ColumnSpan="2">
 

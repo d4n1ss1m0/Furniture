@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Furniture.Views.DeliveryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Furniture.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="403*"/>
+            <ColumnDefinition Width="181*"/>
+            <ColumnDefinition Width="216*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="133*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Content="Создать маршрутный лист" Margin="30,10,10,10" Command="{Binding GetTask}"/>
+        <Button x:Name="CreateReport" Content="Создать отчет" Command="{Binding CreateReport}" Grid.Column="2" Grid.Row="0" Margin="30,10,10,10"/>
+        <Button Content="Получить квитанцию" Command="{Binding GetReciept}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="0,10,10,10"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1">
+            <DataGrid x:Name="ordersGrid"  x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" IsReadOnly="True"
+    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Delivery, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedItem}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="ID доставки" Width="133*" Binding="{Binding delivery.IdDelivery}"/>
+                    <DataGridTextColumn Header="Товары" Width="133*" Binding="{Binding order}" />
+                    <DataGridTextColumn Header="Адрес" Width="133*" Binding="{Binding receipt.Address}"/>
+                    <DataGridTextColumn Header="Район" Width="133*" Binding="{Binding receipt.IDarea}"/>
+                    <DataGridTextColumn Header="Дата" Width="133*" Binding="{Binding delivery.Date}"/>
+                    <DataGridTextColumn Header="Время" Width="133*" Binding="{Binding delivery.Time}"/>
+                    <DataGridTextColumn Header="Водитель" Width="133*" Binding="{Binding driver.LastName}"/>
+                    <DataGridTextColumn Header="Грузчик" Width="133*" Binding="{Binding loader.LastName}"/>
+                    <DataGridTextColumn Header="Машина" Width="133*" Binding="{Binding truck.PlateNum}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

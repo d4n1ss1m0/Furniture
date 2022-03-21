@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Button x:Name="CreateReport" Content="Создать отчет" Command="{Binding CreateReport}" Grid.Column="1" Grid.Row="0"/>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
-            <DataGrid x:Name="ordersGrid"  x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+            <DataGrid x:Name="ordersGrid"  x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" IsReadOnly="True"
     RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Orders, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="ID чека" Width="133*" Binding="{Binding Bill.IDbill}"/>

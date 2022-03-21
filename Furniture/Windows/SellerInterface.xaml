@@ -7,6 +7,8 @@
         xmlns:viewmodels="clr-namespace:Furniture.ViewModels"
         xmlns:views="clr-namespace:Furniture.Views"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         Title="SellerInterface" Height="720" Width="1280">
     <Grid>
         <TabControl x:Name="products">

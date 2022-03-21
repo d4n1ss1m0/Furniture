@@ -1,0 +1,46 @@
+﻿<Window x:Class="Furniture.Windows.TableInteface"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Furniture.Windows"
+        mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        Title="TableInteface" Height="720" Width="1280">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="27*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="133*"/>
+        </Grid.RowDefinitions>
+        <ComboBox FontSize="20" Margin="10,20,700,20" x:Name="combo" SelectionChanged="combo_SelectionChanged">
+            <ComboBoxItem Content="Аккаунты"/>
+            <ComboBoxItem Content="Заявки"/>
+            <ComboBoxItem Content="Районы"/>
+            <ComboBoxItem Content="Чеки"/>
+            <ComboBoxItem Content="Бригады"/>
+            <ComboBoxItem Content="Категории"/>
+            <ComboBoxItem Content="Доставки"/>
+            <ComboBoxItem Content=">Водители"/>
+            <ComboBoxItem Content="Товары"/>
+            <ComboBoxItem Content="Товары_Чеки"/>
+            <ComboBoxItem Content="Товары_Закупки"/>
+            <ComboBoxItem Content="Грузчики"/>
+            <ComboBoxItem Content="Закупки"/>
+            <ComboBoxItem Content="Квитанции"/>
+            <ComboBoxItem Content="Продавцы"/>
+            <ComboBoxItem Content="оставщики"/>
+            <ComboBoxItem Content="Грузовики"/>
+        </ComboBox>
+        <ScrollViewer Grid.Row ="1" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row ="1" Grid.ColumnSpan="2">
+            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="True" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="Gray" >
+            </DataGrid>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

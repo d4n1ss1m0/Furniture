@@ -68,6 +68,7 @@ namespace Furniture.ViewModels
 
                         int IDmaxCountF = furniture_Bills[maxCount].IDfuniture;
                         int IDminCountF = furniture_Bills[minCount].IDfuniture;
+                        Seller seller = db.Sellers.Where(p=>p.Account == App.acc.id).First();
                         WordHelper helper = new WordHelper(@"..\..\WordTemplates\SellerReport.docx");
                         Dictionary<string, string> items = new Dictionary<string, string>
                         {
@@ -76,13 +77,16 @@ namespace Furniture.ViewModels
                             {"<date2>", date2.ToString("dd.MM.yyyy") },
                             {"<ordersCount>", countOfOrders.ToString() },
                             {"<ordersSum>", ordersSum.ToString() },
-                            {"<maxCountF>", db.Furnitures.Where(p=>p.IDfurniture == IDmaxCountF).FirstOrDefault().Name.ToString() },
-                            {"<maxCountC>", furniture_Bills[maxCount].Sum.ToString() },
-                            {"<minCountF>", db.Furnitures.Where(p=>p.IDfurniture == IDminCountF).FirstOrDefault().Name.ToString() },
-                            {"<minCountC>", furniture_Bills[minCount].Sum.ToString() },
+                            {"<sLN>", seller.LastName },
+                            {"<sFN>", seller.FirstName[0].ToString() },
+                            {"<sMN>", seller.MidName[0].ToString() },
+                            {"<maxCountF>", db.Furnitures.Where(p=>p.IDfurniture == IDmaxCountF).FirstOrDefault().Name.ToString().TrimEnd(' ')},
+                            {"<maxCountC>", furniture_Bills[maxCount].Sum.ToString().Replace(" ",string.Empty) },
+                            {"<minCountF>", db.Furnitures.Where(p=>p.IDfurniture == IDminCountF).FirstOrDefault().Name.ToString().TrimEnd(' ') },
+                            {"<minCountC>", furniture_Bills[minCount].Sum.ToString().TrimEnd(' ')},
                         };
 
-                        helper.CreateDocument(items, "kekw");
+                        helper.CreateDocument(items, "Seller");
                     }
                     else
                     {

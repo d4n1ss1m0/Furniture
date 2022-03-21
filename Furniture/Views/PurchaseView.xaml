@@ -7,16 +7,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
-        <StackPanel>
-            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
-    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Purchases, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Columns >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="401*"/>
+        </Grid.RowDefinitions><!--
+        <Button Content="Сохранить" HorizontalAlignment="Right" Margin="0,10" Command="{Binding Save}"/>-->
+        <StackPanel Grid.Row="1">
+            <DataGrid Name="testGrid" x:FieldModifier="public" AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray" 
+    RowBackground="LightGray" AlternatingRowBackground="Gray" ItemsSource="{Binding Purchases, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                <DataGrid.Columns>
                     <DataGridTextColumn Header="Номер закупки" Width="133*" Binding="{Binding Purchase.IDPurchase}"/>
                     <DataGridTextColumn Header="Номер товара" Width="133*" Binding="{Binding Purchase.IDfurniture}" />
                     <DataGridTextColumn Header="Сумма закупки" Width="133*" Binding="{Binding Purchase.Sum}"/>
                     <DataGridTextColumn Header="Количество" Width="133*" Binding="{Binding Purchase.Amount}"/>
                     <DataGridTextColumn Header="Дата оформления" Width="133*" Binding="{Binding Purchase.DatePurchase}" />
-                    <DataGridTextColumn Header="Дата получения" Width="133*" Binding="{Binding Purchase.DateRecord}"/>
+                    <DataGridTextColumn Header="Дата получения" Width="133*" Binding="{Binding Date}"/>
                     <DataGridTextColumn Header="Поставщик" Width="133*" Binding="{Binding Supplier.Name}"/>
                     <DataGridTextColumn Header="Адрес поставщика" Width="133*" Binding="{Binding Supplier.Address}"/>
                 </DataGrid.Columns>

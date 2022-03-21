@@ -22,7 +22,11 @@ namespace Furniture.Windows
         public SellerInterface(Store.NavigationStore navigationStore)
         {
             InitializeComponent();
-            DataContext = new ViewModels.SellerInterfaceViewModel(navigationStore);
+            ViewModels.SellerInterfaceViewModel vm = new ViewModels.SellerInterfaceViewModel(navigationStore);
+            DataContext = vm;
+            Closing += vm.OnWindowClosing;
         }
+
+        
     }
 }

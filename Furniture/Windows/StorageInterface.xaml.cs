@@ -22,7 +22,9 @@ namespace Furniture.Windows
         public StorageInterface(Store.NavigationStore navigationStore)
         {
             InitializeComponent();
-            DataContext = new ViewModels.StorageInterfaceViewModel(navigationStore);
+            ViewModels.StorageInterfaceViewModel vm = new ViewModels.StorageInterfaceViewModel(navigationStore);
+            DataContext = vm;
+            Closing += vm.OnWindowClosing;
         }
     }
 }

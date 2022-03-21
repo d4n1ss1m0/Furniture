@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Furniture.Commands;
 using Furniture.Store;
 using Furniture.Models;
+using System.Windows;
 
 namespace Furniture.ViewModels
 {
@@ -17,6 +18,27 @@ namespace Furniture.ViewModels
         public PurchaseViewModel(NavigationStore navigationStore)
         {
             Purchases = new ObservableCollection<PurchaseItem>();
+            Save = new SmartCommand(() => {
+                using (FurnitureContext db = new FurnitureContext())
+                {
+                    foreach (var purchase in Purchases)
+                    {
+                        DateTime tempDate;
+                        if (DateTime.TryParse(purchase.Date, out tempDate))
+                        {
+                            var temp = db.Purchase.Where(p => p.IDPurchase == purchase.Purchase.IDPurchase).First();
+                            temp.DateRecord = DateTime.Parse(purchase.Date);
+                            db.SaveChanges();
+
+                        }
+                        else if (purchase.Date!= "Добавьте дату")
+                        {
+                            MessageBox.Show("Предупреждение: данные, указанные не в виде даты сохранены не будут!");
+                        }
+                    }
+                }
+            });
+
             using (FurnitureContext db = new FurnitureContext())
             {
                 var t = db.Purchase;
@@ -27,11 +49,11 @@ namespace Furniture.ViewModels
                 }
             }
             //NavigateSellerCommand = new NavigateCommand<SellerViewModel>(navigationStore, () => new SellerViewModel(navigationStore));
-            /*
-            Add = new SmartCommand(() => {
-                new Windows.AddApplicationView().Show();
-            });*/
+            
+            
         }
-        public static ObservableCollection<PurchaseItem> Purchases { get => purchases; set => purchases = value; }
+
+        public static ICommand Save { get; set; }
+        public static ObservableCollection<PurchaseItem> Purchases { get => purchases; set => purchases = value;  }
     }
 }

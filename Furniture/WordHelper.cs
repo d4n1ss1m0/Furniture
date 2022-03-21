@@ -49,13 +49,9 @@ namespace Furniture
                     Format: false,
                     ReplaceWith: missing,
                     Replace: replace);
-
-               
-
             }
             string newFileName = new DirectoryInfo(@"..\..\Reports\").FullName + DateTime.Now.ToString("ddMMyyyy HHmmss") + _fileInfo.Name;
             app.ActiveDocument.SaveAs2(newFileName);
-
             app.ActiveDocument.Close();
             app.Quit();
         }

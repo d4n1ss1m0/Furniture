@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Furniture.Models
 {
-    class Loaders
+    public class Loaders
     {
         private int idLoader;
         private string firstName;
@@ -20,7 +20,7 @@ namespace Furniture.Models
         public int IDloader { get => idLoader; set => idLoader = value; }
         public string FirstName { get => firstName; set => firstName = value; }
         public string LastName { get => lastName; set => lastName = value; }
-        public string MidlleName { get => midName; set => midName = value; }
+        public string MiddleName { get => midName; set => midName = value; }
         public string Phone { get => phone; set => phone = value; }
     }
 }

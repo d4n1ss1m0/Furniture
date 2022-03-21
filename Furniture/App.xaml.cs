@@ -21,11 +21,8 @@ namespace Furniture
             
             NavigationStore navigationStore = new NavigationStore();
             navigationStore.CurrentViewModel = new LoginViewModel(navigationStore);
-            
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(navigationStore)
-            };
+
+            MainWindow = new MainWindow(navigationStore);
             MainWindow.Show();
             base.OnStartup(e);
         }

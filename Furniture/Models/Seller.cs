@@ -17,6 +17,7 @@ namespace Furniture.Models
         private string midName;
         private decimal salary;
         private decimal sumProd;
+        private int account;
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IDseller { get => idSeller; set => idSeller = value; }
@@ -25,5 +26,6 @@ namespace Furniture.Models
         public string MidName { get => midName; set => midName = value; }
         public decimal Salary { get => salary; set => salary = value; }
         public decimal SumProd { get => sumProd; set => sumProd = value; }
+        public int Account { get => account; set => account = value; }
     }
 }
